@@ -1,8 +1,6 @@
 # Robot Cloud Food Delivery Application
 
 
-To better understand the architecture, workings and technologies required to develop a MERN stack distributed system.
-
 ## Features
 
 The following features from the original application were simulated
