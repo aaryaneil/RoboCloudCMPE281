@@ -13,8 +13,8 @@ export default class CreateDeliveryLog extends Component {
 
     this.state = {
       robotname: '',
-      date: new Date(),
-      robots: []
+      robots:[],
+      deliveries: []
     }
   }
 
@@ -40,6 +40,24 @@ export default class CreateDeliveryLog extends Component {
     })
   }
 
+  deliveryList() {
+    if (this.state.deliveries && this.state.deliveries.length){
+
+
+    return this.state.deliveries.map(delivery => {
+      return (<tr>
+        <td>{delivery.robotname}</td>
+        <td>{delivery.description}</td>
+        <td>{delivery.createdAt.substring(0.10)}</td>
+          <td>{delivery.status}</td>
+      
+      </tr>);
+    })
+    }else{
+      return (<tr><td>Loading</td></tr>)
+    }
+  }
+
   
 
   onChangeDate(date) {
@@ -49,19 +67,22 @@ export default class CreateDeliveryLog extends Component {
   }
 
   onSubmit(e) {
+    
     e.preventDefault();
 
     const delivery = {
-      robotname: this.state.robotname,
-      date: this.state.date
+      robotname: this.state.robotname
     }
 
     console.log(delivery);
 
-    axios.post('http://localhost:4000/deliveries/add', delivery)
-      .then(res => console.log(res.data));
+    axios.post('http://localhost:4000/deliveries/getLog', delivery)
+      .then(res => this.setState({
+        deliveries :res.data
+      }));
 
-    window.location = '/';
+
+   
   }
 
   // deliveryLog() {
@@ -72,6 +93,7 @@ export default class CreateDeliveryLog extends Component {
 
   render() {
     return (
+      <>
     <div>
       <h3>Create New Delivery Log</h3>
       <form onSubmit={this.onSubmit}>
@@ -94,7 +116,15 @@ export default class CreateDeliveryLog extends Component {
         </div>
         
 
-        {/* <div>
+      
+
+        <div className="form-group">
+          <input type="submit" value="Create Delivery Log" className="btn btn-primary" />
+        </div>
+      </form>
+    </div>
+    <div className='form-group'>
+    <h3>Deliveries:</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>
@@ -102,19 +132,15 @@ export default class CreateDeliveryLog extends Component {
               <th>Description</th>
               <th>Duration</th>
               <th>Date</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            { this.deliveryLog() }
+            { this.deliveryList() }
           </tbody>
         </table>
-        </div> */}
-
-        <div className="form-group">
-          <input type="submit" value="Create Delivery Log" className="btn btn-primary" />
-        </div>
-      </form>
     </div>
+    </>
     )
   }
 }

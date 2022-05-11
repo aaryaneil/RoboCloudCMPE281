@@ -10,6 +10,8 @@ const robotSchema = new Schema({
     trim: true,
     minlength: 3
   },
+  robottype:{type:String, required: true}
+
 }, {
   timestamps: true,
 });
