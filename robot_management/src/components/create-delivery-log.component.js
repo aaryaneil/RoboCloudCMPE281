@@ -48,7 +48,7 @@ export default class CreateDeliveryLog extends Component {
       return (<tr>
         <td>{delivery.robotname}</td>
         <td>{delivery.description}</td>
-        <td>{delivery.createdAt.substring(0.10)}</td>
+        <td>{delivery.createdAt}</td>
           <td>{delivery.status}</td>
       
       </tr>);
@@ -130,7 +130,6 @@ export default class CreateDeliveryLog extends Component {
             <tr>
               <th>Robotname</th>
               <th>Description</th>
-              <th>Duration</th>
               <th>Date</th>
               <th>Status</th>
             </tr>

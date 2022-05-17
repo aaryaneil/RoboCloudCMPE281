@@ -1,6 +1,7 @@
 const express = require('express');
 var cors = require('cors');
 var mongoose = require('mongoose');
+const nodeCron = require("node-cron");
 
 require('dotenv').config();
 
@@ -24,8 +25,7 @@ app.use(function(req, res, next) {
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-);
+mongoose.connect(uri);
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
@@ -33,8 +33,27 @@ connection.once('open', () => {
 
 const deliveriesRouter = require('./routes/deliveries');
 const robotsRouter = require('./routes/robots');
+const Robot = require('./models/robot.model');
+const Delivery = require('./models/delivery.model');
 
-app.use('/deliveries', deliveriesRouter);
+
+
+const job = nodeCron.schedule("* * * * * *", ()=> {
+  Robot.findOne({ isAvailable:true }, (req, res) =>{
+
+    if(Delivery.findOne({}))
+    
+    }
+  })
+  
+});
+
+
+
+
+
+
+app.use("/deliveries", deliveriesRouter);
 app.use('/robots', robotsRouter);
 
 app.listen(port, () => {

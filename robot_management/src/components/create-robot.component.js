@@ -27,6 +27,7 @@ export default class CreateRobot extends Component {
         this.setState({ robots: response.data })
       })
       .catch((error) => {
+        console.log("API not found");
         console.log(error);
       })
   }
@@ -37,6 +38,9 @@ export default class CreateRobot extends Component {
       robotname: e.target.value
     })
   }
+
+
+  
   onChangeRobotType(e) {
     console.log(e.target.value)
     this.setState({
@@ -70,7 +74,7 @@ export default class CreateRobot extends Component {
       return (<tr>
         <td>{robot.robotname}</td>
         <td>{robot.robottype}</td>
-        <td>{robot.createdAt.substring(0,10)}</td>
+        <td>{robot.createdAt}</td>
         {/* <td>
            <a href="#" onClick={() => { props.deleteDelivery(props.delivery._id) }}>delete</a>
         </td> */}
@@ -122,7 +126,7 @@ export default class CreateRobot extends Component {
               <th>Robotname</th>
               <th>Robot Type</th>
               <th>Date Created</th>
-              {/* <th>Delete</th> */}
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>

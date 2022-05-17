@@ -5,12 +5,16 @@ const Schema = mongoose.Schema;
 const robotSchema = new Schema({
   robotname: {
     type: String,
-    required: true,
     unique: true,
     trim: true,
     minlength: 3
   },
-  robottype:{type:String, required: true}
+  isAvailable:{type: Boolean,default:true,required:true},
+  robottype:{type:String, required: true},
+  logs:{
+    type:[String],
+    select:"Robot created"
+ }
 
 }, {
   timestamps: true,
