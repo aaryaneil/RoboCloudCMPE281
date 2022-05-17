@@ -38,16 +38,6 @@ const Delivery = require('./models/delivery.model');
 
 
 
-const job = nodeCron.schedule("* * * * * *", ()=> {
-  Robot.findOne({ isAvailable:true }, (req, res) =>{
-
-    if(Delivery.findOne({}))
-    
-    }
-  })
-  
-});
-
 
 
 
