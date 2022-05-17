@@ -39,7 +39,7 @@ router.route('/:id').get((req, res) => {
 //     .catch(err => res.status(400).json('Error: ' + err));
 // });
 
-router.route('/getlog').post((req, res) => {
+router.route('/getlog').get((req, res) => {
   console.log(req)
   Delivery.find({robotname : req.body.robotname })
     .then(deliveries=>res.json(deliveries))

@@ -40,12 +40,25 @@ export default class CreateDeliveryLog extends Component {
 
     this.setState({
       robotname: e.target.value
+    
+    })
+
+    axios.get('http://localhost:4000/getlog' )
+    .then(response => {
+      console.log("inside fe getlog robots api--------------------------------------------------------------")
+      if (response.data.length > 0) {
+     
+        // this.setState({
+        //   robots: response.data.map(robot => robot.robotname),
+        //   robotname: response.data[0].robotname
+        // })
+        console.log(response)
+      }
     })
     console.log(e.target.value)
   }
 
   deliveryList() {
-    if (this.state.deliveries && this.state.deliveries.length){
 
 
       return this.state.deliveries.map(delivery => {
@@ -72,7 +85,7 @@ export default class CreateDeliveryLog extends Component {
 
     console.log(delivery);
 
-    axios.post('http://localhost:4000/deliveries/getLog', delivery)
+    axios.post('http://localhost:4000/getLog', delivery)
       .then(res => this.setState({
         deliveries :res.data
       }));
@@ -139,4 +152,3 @@ export default class CreateDeliveryLog extends Component {
     </div>
     )
   }
-}
