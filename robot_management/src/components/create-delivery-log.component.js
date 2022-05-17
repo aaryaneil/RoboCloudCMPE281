@@ -22,6 +22,7 @@ export default class CreateDeliveryLog extends Component {
     axios.get('http://localhost:4000/robots/')
       .then(response => {
         if (response.data.length > 0) {
+          console.log(response.data)
           this.setState({
             robots: response.data.map(robot => robot.robotname),
             robotname: response.data[0].robotname
@@ -35,27 +36,55 @@ export default class CreateDeliveryLog extends Component {
   }
 
   onChangeRobotname(e) {
+    console.log("Now calling the api")
+
     this.setState({
       robotname: e.target.value
+    
     })
+
+    axios.get('http://localhost:4000/getlog' )
+    .then(response => {
+      console.log("inside fe getlog robots api--------------------------------------------------------------")
+      if (response.data.length > 0) {
+     
+        // this.setState({
+        //   robots: response.data.map(robot => robot.robotname),
+        //   robotname: response.data[0].robotname
+        // })
+        console.log(response)
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    console.log(e.target.value)
   }
 
   deliveryList() {
-    if (this.state.deliveries && this.state.deliveries.length){
 
 
-    return this.state.deliveries.map(delivery => {
-      return (<tr>
-        <td>{delivery.robotname}</td>
-        <td>{delivery.description}</td>
-        <td>{delivery.createdAt}</td>
-          <td>{delivery.status}</td>
+
+
+
+
+
+
+    // if (this.state.deliveries && this.state.deliveries.length){
+
+
+    // return this.state.deliveries.map(delivery => {
+    //   return (<tr>
+    //     <td>{delivery.robotname}</td>
+    //     <td>{delivery.description}</td>
+    //     <td>{delivery.createdAt.substring(0.10)}</td>
+    //       <td>{delivery.status}</td>
       
-      </tr>);
-    })
-    }else{
-      return (<tr><td>Loading</td></tr>)
-    }
+    //   </tr>);
+    // })
+    // }else{
+    //   return (<tr><td>Loading</td></tr>)
+    // }
   }
 
   
@@ -76,7 +105,7 @@ export default class CreateDeliveryLog extends Component {
 
     console.log(delivery);
 
-    axios.post('http://localhost:4000/deliveries/getLog', delivery)
+    axios.post('http://localhost:4000/getLog', delivery)
       .then(res => this.setState({
         deliveries :res.data
       }));
@@ -130,6 +159,7 @@ export default class CreateDeliveryLog extends Component {
             <tr>
               <th>Robotname</th>
               <th>Description</th>
+              <th>Duration</th>
               <th>Date</th>
               <th>Status</th>
             </tr>

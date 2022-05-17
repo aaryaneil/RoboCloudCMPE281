@@ -1,7 +1,6 @@
 const express = require('express');
 var cors = require('cors');
 var mongoose = require('mongoose');
-const nodeCron = require("node-cron");
 
 require('dotenv').config();
 
@@ -22,10 +21,16 @@ app.use(function(req, res, next) {
 
 
 
+
+
+
+
+
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri);
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
+);
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
@@ -33,14 +38,18 @@ connection.once('open', () => {
 
 const deliveriesRouter = require('./routes/deliveries');
 const robotsRouter = require('./routes/robots');
-const Robot = require('./models/robot.model');
-const Delivery = require('./models/delivery.model');
 
-
-
-
-app.use("/deliveries", deliveriesRouter);
+app.use('/deliveries', deliveriesRouter);
 app.use('/robots', robotsRouter);
+
+app.get('/getlog',(req, res) => {
+  console.log(req)
+  Delivery.find({robotname : req.params.robotname })
+    .then(res => {
+      console.log(res) + "found in the database";
+    })
+    .catch(err => res.status(400).json('Error is: '+err.res));
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

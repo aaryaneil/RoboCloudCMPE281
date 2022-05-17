@@ -10,6 +10,9 @@ const Delivery = props => (
     <td></td>
     {/* <td>{props.delivery.date.substring(0,10)}</td> */}
     <td>{props.delivery.deliveryStatus}</td>
+    <td>
+       <a href="#" onClick={() => { props.deleteDelivery(props.delivery._id) }}>track</a>
+    </td>
   </tr>
 )
 
@@ -59,6 +62,7 @@ export default class DeliveriesList extends Component {
               <th>Duration</th>
               <th>Date</th>
               <th>Status</th>
+              <th>Track</th>
             </tr>
           </thead>
           <tbody>

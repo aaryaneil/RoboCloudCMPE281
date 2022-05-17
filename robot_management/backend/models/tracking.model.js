@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const robotSchema = new Schema({
+const trackingSchema = new Schema({
   robotname: {
     type: String,
     required: true,
-    unique: true,
-    trim: true,
-    minlength: 3
-  },
-  robottype:{type:String, required: true}
+},
+  speed:{type: String},
+
+  gps:{type:String}
 
 }, {
   timestamps: true,
