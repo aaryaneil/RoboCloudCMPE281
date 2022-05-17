@@ -3,13 +3,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const deliverySchema = new Schema({
-  robotname: { type: String, required: true },
-  description: { type: String, required: true },
-  duration: { type: Number, required: true },
+  robotname: { type: String },
+  description: { type: String},
+  duration: { type: Number },
   date :{type:String,required: true},
   deliveryStatus:{
     type: String,
-    enum: ["OPEN","DELIVERED","CANCELLED"]
+    enum: ["OPEN","DELIVERED","CANCELLED"],
+  deliveryCompleted:{type:Date},
+  deliveryStarted : {type:Date}
 }
 });
 

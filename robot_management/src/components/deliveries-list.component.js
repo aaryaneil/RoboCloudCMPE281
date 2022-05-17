@@ -6,13 +6,9 @@ const Delivery = props => (
   <tr>
     <td>{props.delivery.robotname}</td>
     <td>{props.delivery.description}</td>
-    <td>{props.delivery.duration}</td>
-    <td></td>
-    {/* <td>{props.delivery.date.substring(0,10)}</td> */}
+    <td>{props.delivery.deliveryStarted}</td>
+    <td>{props.delivery.deliveryCompleted}</td>
     <td>{props.delivery.deliveryStatus}</td>
-    <td>
-       <a href="#" onClick={() => { props.deleteDelivery(props.delivery._id) }}>track</a>
-    </td>
   </tr>
 )
 
@@ -59,10 +55,9 @@ export default class DeliveriesList extends Component {
             <tr>
               <th>Robotname</th>
               <th>Description</th>
-              <th>Duration</th>
-              <th>Date</th>
+              <th>Start Time</th>
+              <th>End Time</th>
               <th>Status</th>
-              <th>Track</th>
             </tr>
           </thead>
           <tbody>

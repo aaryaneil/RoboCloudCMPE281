@@ -10,7 +10,11 @@ const robotSchema = new Schema({
     trim: true,
     minlength: 3
   },
-  robottype:{type:String, required: true}
+  isAvailable:{type: Boolean,default:true,required:true},
+   robottype:{type:String, required: true},
+   logs:{
+     type:[String]
+   }
 
 }, {
   timestamps: true,

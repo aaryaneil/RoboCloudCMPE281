@@ -17,7 +17,7 @@ function App() {
       <Route path="/" exact component={DeliveriesList} />
       <Route path="/edit/:id" component={EditDelivery} />
       <Route path="/create" component={CreateDeliveryLog} />
-      <Route path="/robot" component={CreateRobot} />
+      <Route path="/robots" component={CreateRobot} />
       </div>
     </Router>
   );

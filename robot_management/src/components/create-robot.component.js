@@ -67,10 +67,10 @@ export default class CreateRobot extends Component {
 
 
     return this.state.robots.map(robot => {
-      return (<tr>
+      return (<tr key={robot._id}>
         <td>{robot.robotname}</td>
         <td>{robot.robottype}</td>
-        <td>{robot.createdAt.substring(0,10)}</td>
+        <td>{robot.createdAt}</td>
         {/* <td>
            <a href="#" onClick={() => { props.deleteDelivery(props.delivery._id) }}>delete</a>
         </td> */}

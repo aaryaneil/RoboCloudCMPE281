@@ -9,23 +9,23 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
-  const robotname = req.body.robotname;
-  const description = req.body.description;
-  const duration = Number(req.body.duration);
-  const date = Date.parse(req.body.date);
+// router.route('/add').post((req, res) => {
+//   const robotname = req.body.robotname;
+//   const description = req.body.description;
+//   const duration = Number(req.body.duration);
+//   const date = Date.parse(req.body.date);
 
-  const newDelivery = new Delivery({
-    robotname,
-    description,
-    duration,
-    date,
-  });
+//   const newDelivery = new Delivery({
+//     robotname,
+//     description,
+//     duration,
+//     date,
+//   });
 
-  newDelivery.save()
-  .then(() => res.json('Delivery added!'))
-  .catch(err => res.status(400).json('Error: ' + err));
-});
+//   newDelivery.save()
+//   .then(() => res.json('Delivery added!'))
+//   .catch(err => res.status(400).json('Error: ' + err));
+// });
 
 router.route('/:id').get((req, res) => {
   Delivery.findById(req.params.id)
@@ -33,17 +33,16 @@ router.route('/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
-  Delivery.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Delivery deleted.'))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+// router.route('/:id').delete((req, res) => {
+//   Delivery.findByIdAndDelete(req.params.id)
+//     .then(() => res.json('Delivery deleted.'))
+//     .catch(err => res.status(400).json('Error: ' + err));
+// });
 
 router.route('/getlog').post((req, res) => {
+  console.log(req)
   Delivery.find({robotname : req.body.robotname })
-    .then(res => {
-      console.log(res);
-    })
+    .then(deliveries=>res.json(deliveries))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
