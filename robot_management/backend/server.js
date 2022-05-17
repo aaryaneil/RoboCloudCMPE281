@@ -38,9 +38,15 @@ const Delivery = require('./models/delivery.model');
 
 
 
+const job = nodeCron.schedule(("* * * * * *", ()=> {
+  let delivery= Delivery.findOne({ deliveryStatus:"OPEN" });
+  let robot = Robot.findOne({robotname:delivery.robotname});
 
+  robot.log.push(robot.name+" is on delivery job for "+delivery.description);
 
+  
 
+})
 
 
 app.use("/deliveries", deliveriesRouter);
