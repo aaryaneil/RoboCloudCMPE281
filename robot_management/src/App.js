@@ -16,7 +16,7 @@ function App() {
       <br/>
       <Route path="/" exact component={DeliveriesList} />
       <Route path="/edit/:id" component={EditDelivery} />
-      <Route path="/create" component={CreateDeliveryLog} />
+      <Route path="/getlog" component={CreateDeliveryLog} />
       <Route path="/robot" component={CreateRobot} />
       </div>
     </Router>
