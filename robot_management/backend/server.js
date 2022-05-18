@@ -41,9 +41,6 @@ const robotsRouter = require('./routes/robots');
 app.use('/deliveries', deliveriesRouter);
 app.use('/robots', robotsRouter);
 
-<<<<<<< HEAD
-
-=======
 app.get('/getlog',(req, res) => {
   console.log(req)
   Delivery.find({robotname : req.params.robotname })
@@ -52,7 +49,6 @@ app.get('/getlog',(req, res) => {
     })
     .catch(err => res.status(400).json('Error is: '+err.res));
 });
->>>>>>> 96d86dad21fdcec273d3ba7ec1b1dfdb418991c7
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
